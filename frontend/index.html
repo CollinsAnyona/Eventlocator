@@ -1,0 +1,225 @@
+<!<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Locator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .image-header {
+          position: relative;
+          text-align: center;
+        }
+        
+        .image-header img {
+          width: 100%;
+          height: 100vh; /* or a specific height */
+          object-fit: cover;
+        }
+        
+        .image-header .overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5); /* or a specific color */
+        }
+        
+        .image-header h1, .image-header p {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          color: #fff; /* or a specific color */
+          z-index: 1;
+        }
+        .overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: #1bc2ff;
+        }
+
+        .animate {
+            animation: animate 2s ease-out;
+        }
+
+        @keyframes animate {
+            0% {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(35, 35, 35, 0.1);
+        }
+
+        .my-5 {
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .bg-dark {
+            background-color: #1bc2ff;
+        }
+
+        .text-light {
+            color: #fff;
+        }
+
+        .py-3 {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">Event Locator</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#events">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <header class="image-header">
+      <img src="./images/background.jpeg" alt="">
+      <div class="overlay"></div>
+      <div>
+        <h1 class="animate"  id="home">Find Exciting Events in Your City</h1>
+      </div>
+    </header>
+    
+    <section class="container my-5">
+        <h2 class="text-center" id="events">Search for Events</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <input type="text" id="search" class="form-control" placeholder="Search by event name">
+            </div>
+            <div class="col-md-3">
+                <input type="date" id="dateFilter" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <select id="categoryFilter" class="form-control">
+                    <option value="">All Categories</option>
+                    <option value="Music">Music</option>
+                    <option value="Tech">Tech</option>
+                    <option value="Sports">Sports</option>
+                </select>
+            </div>
+        </div>
+    </section>
+    
+    <section class="container my-5" id="eventList">
+        <h2 class="text-center">Upcoming Events</h2>
+        <div class="row" id="eventsContainer">
+            <!-- Events will be loaded here dynamically -->
+        </div>
+    </section>
+
+
+  <!-- Map of Kenya -->
+  <section class="container my-5" id="map">
+    <h2 class="text-center">Map of Kenya</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-12">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8171114.064230905!2d32.60312873858967!3d0.16493506219190487!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182780d08350900f%3A0x403b0eb0a1976dd9!2sKenya!5e0!3m2!1sen!2ske!4v1742060035433!5m2!1sen!2ske" width="100%" height="600" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+    
+    <footer class="bg-dark text-light text-center py-3">
+        <p>&copy; 2025 Event Locator. All Rights Reserved.</p>
+    </footer>
+    
+    <script>
+        const events = [
+            { name: "African Tech Summit", date: "2025-05-10", category: "Tech", location: "Nairobi", description: "Join top tech leaders." },
+            { name: "Music Festival", date: "2025-06-20", category: "Music", location: "Kampala", description: "Live music performances." },
+            { name: "Marathon Run", date: "2025-07-15", category: "Sports", location: "Osaka", description: "Annual marathon event." }
+        ];
+
+        function displayEvents(filteredEvents) {
+            let eventHTML = "";
+            filteredEvents.forEach(event => {
+                eventHTML += `<div class='col-md-4'>
+                                <div class='card mb-4'>
+                                    <div class='card-body'>
+                                        <h5 class='card-title'>${event.name}</h5>
+                                        <p class='card-text'><strong>Date:</strong> ${event.date}</p>
+                                        <p class='card-text'><strong>Location:</strong> ${event.location}</p>
+                                        <p class='card-text'>${event.description}</p>
+                                    </div>
+                                </div>
+                            </div>`;
+            });
+            document.getElementById("eventsContainer").innerHTML = eventHTML;
+        }
+
+        document.getElementById("search").addEventListener("input", function() {
+            filterEvents();
+        });
+
+        document.getElementById("dateFilter").addEventListener("change", function() {
+            filterEvents();
+        });
+
+        document.getElementById("categoryFilter").addEventListener("change", function() {
+            filterEvents();
+        });
+
+        function filterEvents() {
+            let searchQuery = document.getElementById("search").value.toLowerCase();
+            let selectedDate = document.getElementById("dateFilter").value;
+            let selectedCategory = document.getElementById("categoryFilter").value;
+
+            let filteredEvents = events.filter(event => {
+                return (event.name.toLowerCase().includes(searchQuery) || searchQuery === "") &&
+                       (event.date === selectedDate || selectedDate === "") &&
+                       (event.category === selectedCategory || selectedCategory === "");
+            });
+
+            displayEvents(filteredEvents);
+        }
+
+        displayEvents(events);
+    </script>
+</body>
+</html>
